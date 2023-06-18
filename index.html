@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+<!-- 터질것만 같은 행복한 기분으로 -->
+<!-- 틀에 박힌 관념 다 버리고 이제 또 -->
+<!-- 맨 주먹 정신 다시 또 시작하면 -->
+<!-- 나 이루리라 다 나 바라는대로 -->
+
+
+
+
+<head>
+  <title>Worlds, Hello!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #language-info {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .language-name {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function showLanguageInfo() {
+      var languageDropdown = document.getElementById("language-dropdown");
+      var selectedLanguage = languageDropdown.value;
+
+      var languageInfo = JSON.parse(selectedLanguage);
+
+      var languageName = languageInfo[0];
+      var languageNameInLanguage = languageInfo[1];
+      var greeting = languageInfo[2];
+      var countriesName = languageInfo[3];
+      var countriesList = languageInfo[4];
+
+      var infoText = '<p class="language-name">[' + languageName + '/' + languageNameInLanguage + ']</p>' +
+                     '<p><strong>[' + "hello" + '] :</strong> ' + greeting + '.</p>' +
+                     '<p><strong>[' + "Countries / " + countriesName + '] :</strong> ' + countriesList + '.</p>';
+
+      document.getElementById("language-info").innerHTML = infoText;
+
+      var googleIcon = document.getElementById("google-icon");
+      var googleLink = "https://www.google.com/search?q=" + languageName;
+      googleIcon.setAttribute("href", googleLink);
+
+      var wikipediaIcon = document.getElementById("wikipedia-icon");
+      var wikipediaLink = "https://en.wikipedia.org/wiki/" + languageName + "_language";
+      wikipediaIcon.setAttribute("href", wikipediaLink);
+    }
+
+
+    function searchLanguage() {
+      var input = document.getElementById("search-input").value.toUpperCase();
+      var options = document.getElementById("language-dropdown").options;
+
+      for (var i = 0; i < options.length; i++) {
+        var text = options[i].textContent || options[i].innerText;
+        if (text.toUpperCase().indexOf(input) > -1) {
+          options[i].style.display = "";
+        } else {
+          options[i].style.display = "none";
+        }
+      }
+    }
+	//iso 참고
+    window.onload = function() {
+      var languageDropdown = document.getElementById("language-dropdown");
+      var languages = [
+		["English", "English", "Hello", "Countries", "United States, United Kingdom, Canada, Australia"],
+	    ["French", "Français", "Bonjour", "Pays", "France, Canada, Belgium, Switzerland"],
+	    ["Spanish", "Español", "Hola", "Países", "Spain, Mexico, Argentina, Colombia"],
+	    ["Korean", "한국어", "안녕 / 안녕하세요", "국가들", "South Korea, North Korea"],
+		["Afrikaans", "Afrikaans", "Hallo", "Land", "South Africa, Namibia"],
+		["Albanian", "Shqip", "Përshëndetje", "Vendet", "Albania, Kosovo, North Macedonia"],
+		["Amharic", "አማርኛ", "ሰላም", "ሀገራዊ ድርጅቶች", "Ethiopia"],
+		["Arabic", "العربية", "مرحباً", "بلدان", "Saudi Arabia, Egypt, United Arab Emirates, Morocco"],
+		["Armenian", "Հայերեն", "Բարև", "Երկրներ", "Armenia, Russia, Iran"],
+		["Assamese", "অসমীয়া", "নমস্কাৰ", "দেশসমূহ", "India"],
+		["Azerbaijani", "Azərbaycan dili", "Salam", "Ölkələr", "Azerbaijan, Iran, Turkey"],
+		["Basque", "Euskara", "Kaixo", "Herrialdeak", "Spain, France"],
+		["Belarusian", "Беларуская", "Прывітанне", "Краіны", "Belarus"],
+		["Bengali", "বাংলা", "হ্যালো", "দেশগুলি", "Bangladesh, India"],
+		["Bosnian", "Bosanski", "Zdravo", "Države", "Bosnia and Herzegovina"],
+		["Bulgarian", "Български", "Здравейте", "Държави", "Bulgaria"],
+		["Burmese", "မြန်မာဘာသာ", "မင်္ဂလာပါ", "တိုင်းရင်းသားများ", "Myanmar (Burma)"],
+		["Catalan", "Català", "Hola", "Països", "Spain, Andorra"],
+		["Cebuano", "Cebuano", "Hello", "Mga Nasud", "Philippines"],
+		["Chichewa", "Chichewa", "Moni", "Madera", "Malawi"],
+		["Chinese (Simplified)", "简体中文", "你好", "国家", "China, Singapore"],
+		["Chinese (Traditional)", "繁體中文", "你好", "國家", "Taiwan, Hong Kong"],
+		["Corsican", "Corsu", "Bonghjornu", "Paesi", "France, Italy"],
+		["Croatian", "Hrvatski", "Bok", "Države", "Croatia"],
+		["Czech", "Čeština", "Ahoj", "Země", "Czech Republic"],
+		["Danish", "Dansk", "Hej", "Lande", "Denmark"],
+		["Dutch", "Nederlands", "Hallo", "Landen", "Netherlands, Belgium"],
+		["Esperanto", "Esperanto", "Saluton", "Landoj", "Worldwide"],
+		["Estonian", "Eesti", "Tere", "Riigid", "Estonia"],
+		["Filipino", "Filipino", "Kamusta", "Mga Bansa", "Philippines"],
+		["Finnish", "Suomi", "Hei", "Maat", "Finland"],
+		["Frisian", "Frysk", "Hallo", "Lannen", "Netherlands, Germany"],
+		["Galician", "Galego", "Ola", "Países", "Spain"],
+		["Georgian", "ქართული", "გამარჯობა", "ქვეყნები", "Georgia"],
+		["German", "Deutsch", "Hallo", "Länder", "Germany, Austria, Switzerland"],
+		["Greek", "Ελληνικά", "Γεια σας", "Χώρες", "Greece"],
+		["Gujarati", "ગુજરાતી", "હેલો", "દેશો", "India"],
+		["Haitian Creole", "Kreyòl Ayisyen", "Bonjou", "Peyi yo", "Haiti"],
+		["Hausa", "Hausa", "Sannu", "Mafiƙar Gwamnatin", "Nigeria"],
+		["Hajinish", "Юlkpkuj", "jgЙq", "eqwpvt#u", "Hajinguk"],
+		["Hajanish", "hajaμ", "kkwallu", "uqzgaʒozp", "Hajinguk"],
+		["Hawaiian", "ʻŌlelo Hawaiʻi", "Aloha", "Nā ʻĀina", "Hawaii"],
+		["Hebrew", "עברית", "שלום", "מדינות", "Israel"],
+		["Hindi", "हिन्दी", "नमस्ते", "देशों", "India"],
+		["Hmong", "Hmoob", "Nyob zoo", "Lub teb chaws", "China, Laos, Thailand"],
+		["Hungarian", "Magyar", "Szia", "Országok", "Hungary"],
+		["Icelandic", "Íslenska", "Halló", "Lönd", "Iceland"],
+		["Igbo", "Igbo", "Ndewo", "Mba", "Nigeria"],
+		["Indonesian", "Indonesia", "Halo", "Negara", "Indonesia"],
+		["Irish", "Gaeilge", "Dia duit", "Tíortha", "Ireland"],
+		["Italian", "Italiano", "Ciao", "Paesi", "Italy, Switzerland"],
+		["Japanese", "日本語", "こんにちは", "国々", "Japan"],
+		["Javanese", "Basa Jawa", "Halo", "Negara", "Indonesia"],
+		["Kannada", "ಕನ್ನಡ", "ಹಲೋ", "ರಾಷ್ಟ್ರಗಳು", "India"],
+		["Kazakh", "Қазақ", "Сәлеметсіз бе", "Елдер", "Kazakhstan"],
+		["Khmer", "ភាសាខ្មែរ", "ជំរាបសួរ", "ប្រទេស", "Cambodia"],
+		["Kinyarwanda", "Kinyarwanda", "Muraho", "Ibihugu", "Rwanda"],
+		["Kirundi", "Kirundi", "Amahoro", "Ibiro", "Burundi"],
+		["Kurdish", "Kurdî", "Silav", "Welatên", "Iraq, Iran, Turkey"],
+		["Kyrgyz", "Кыргызча", "Салам", "Өлкөлөр", "Kyrgyzstan"],
+		["Lao", "ລາວ", "ສະບາຍດີ", "ປະເທດ", "Laos"],
+		["Latin", "Latina", "Salve", "Terrae", "Ancient Rome"],
+		["Latvian", "Latviešu", "Sveiki", "Valstis", "Latvia"],
+		["Lithuanian", "Lietuvių", "Labas", "Šalys", "Lithuania"],
+		["Luxembourgish", "Lëtzebuergesch", "Moien", "Länner", "Luxembourg"],
+		["Macedonian", "Македонски", "Здраво", "Земји", "North Macedonia"],
+		["Malagasy", "Malagasy", "Manao ahoana", "Firenena", "Madagascar"],
+		["Malay", "Bahasa Melayu", "Hai", "Negara-negara", "Malaysia, Indonesia"],
+		["Malayalam", "മലയാളം", "നമസ്കാരം", "രാജ്യങ്ങൾ", "India"],
+		["Maltese", "Malti", "Bongu", "Pajjiżi", "Malta"],
+		["Maori", "Māori", "Kia ora", "Whenua", "New Zealand"],
+		["Marathi", "मराठी", "नमस्कार", "देशांची", "India"],
+		["Mongolian", "Монгол", "Сайн уу", "Улсууд", "Mongolia"],
+		["Nepali", "नेपाली", "नमस्ते", "देशहरू", "Nepal"],
+		["Norwegian", "Norsk", "Hei", "Land", "Norway"],
+		["Nyanja", "Chinyanja", "Moni", "M'madziko", "Malawi"],
+		["Odia", "ଓଡ଼ିଆ", "ନମସ୍କାର", "ଦେଶଗୁଡ଼ିକ", "India"],
+		["Pashto", "پښتو", "سلام", "کډې", "Afghanistan, Pakistan"],
+		["Persian", "فارسی", "سلام", "کشورها", "Iran, Afghanistan"],
+		["Polish", "Polski", "Cześć", "Kraje", "Poland"],
+		["Portuguese", "Português", "Olá", "Países", "Portugal, Brazil"],
+		["Punjabi", "ਪੰਜਾਬੀ", "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ", "ਦੇਸ਼", "India, Pakistan"],
+		["Romanian", "Română", "Bună ziua", "Țări", "Romania"],
+		["Russian", "Русский", "Привет", "Страны", "Russia, Belarus"],
+		["Samoan", "Gagana Samoa", "Talofa", "Itumalo", "Samoa"],
+		["Scots Gaelic", "Gàidhlig", "Halò", "Dùthchannan", "Scotland"],
+		["Serbian", "Српски", "Здраво", "Земље", "Serbia"],
+		["Sesotho", "Sesotho", "Lumela", "Liye tšoene-tšoene", "Lesotho, South Africa"],
+		["Shona", "Shona", "Mhoro", "Mamiriro", "Zimbabwe"],
+		["Sindhi", "سنڌي", "هيلو", "ملڪون", "Pakistan, India"],
+		["Sinhala", "සිංහල", "ආයුබෝවන්", "රටවල්", "Sri Lanka"],
+		["Slovak", "Slovenčina", "Ahoj", "Krajiny", "Slovakia"],
+		["Slovenian", "Slovenščina", "Zdravo", "Države", "Slovenia"],
+		["Somali", "Soomaali", "Salaan", "Dowladaha", "Somalia"],
+		["Southern Sotho", "Sesotho", "Lumela", "Lefatshe", "Lesotho, South Africa"],
+		["Spanish", "Español", "Hola", "Países", "Spain, Mexico, Argentina, Colombia"],
+		["Sundanese", "Basa Sunda", "Halo", "Nagara", "Indonesia"],
+		["Swahili", "Kiswahili", "Habari", "Nchi", "Tanzania, Kenya"],
+		["Swedish", "Svenska", "Hej", "Länder", "Sweden"],
+		["Tajik", "Тоҷикӣ", "Салом", "Кишварҳо", "Tajikistan"],
+		["Tamil", "தமிழ்", "வணக்கம்", "நாடுகள்", "India, Sri Lanka"],
+		["Tatar", "Татар", "Сәлам", "Дөләр", "Russia, Tatarstan"],
+		["Telugu", "తెలుగు", "హలో", "దేశాలు", "India"],
+		["Thai", "ไทย", "สวัสดี", "ประเทศ", "Thailand"],
+		["Turkish", "Türkçe", "Merhaba", "Ülkeler", "Turkey"],
+		["Turkmen", "Türkmençe", "Salam", "Döwletler", "Turkmenistan"],
+		["Ukrainian", "Українська", "Привіт", "Країни", "Ukraine"],
+		["Urdu", "اردو", "ہیلو", "ممالک", "Pakistan, India"],
+		["Uyghur", "ئۇيغۇرچە", "ياخشى بول", "دۆلەتلەر", "China, Central Asia"],
+		["Uzbek", "Oʻzbekcha", "Salom", "Mamlakatlar", "Uzbekistan"],
+		["Vietnamese", "Tiếng Việt", "Xin chào", "Các nước", "Vietnam"],
+		["Welsh", "Cymraeg", "Helo", "Gwledydd", "Wales"],
+		["Xhosa", "isiXhosa", "Molo", "IZwe", "South Africa"],
+		["Yiddish", "ייִדיש", "העלא", "לענדער", "Israel, United States"],
+		["Yoruba", "Yorùbá", "Bawo", "Àwọn orílẹ̀-èdè", "Nigeria"],
+		["Zulu", "isiZulu", "Sawubona", "Izwe", "South Africa"]
+      ];
+
+      for (var i = 0; i < languages.length; i++) {
+        var option = document.createElement("option");
+        option.value = JSON.stringify(languages[i]);
+        option.textContent = languages[i][0] + " (" + languages[i][1] + ")";
+        languageDropdown.appendChild(option);
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Worlds, Hello!</h1>
+
+    <label for="language-dropdown">Select a language:</label>
+    <select id="language-dropdown" onchange="showLanguageInfo()">
+	<input type="text" id="search-input" onkeyup="searchLanguage()" placeholder="Type to search">
+
+    </select>
+	<!-- 여기 고쳐야됨 -->
+    <div id="language-info"></div>
+	<br>
+	<div>
+		<a id="google-icon" href="" target="_blank">
+		  <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png" alt="Google Icon">
+		</a>
+		<a id="wikipedia-icon" href="" target="_blank">
+		  <img class="icon" src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="Wikipedia Icon">
+		</a>
+	  </div>
+  </div>
+</body>
+</html>
